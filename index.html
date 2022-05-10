@@ -7,23 +7,32 @@
     <link rel="stylesheet" href="styles.css">
     <script src="javascripts/index.js"></script>
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
             
     <title>phase-1-project</title>
 </head>
 <body>
     <h1 class="topnav" class="left-align">Bored?</h1> 
-    <p class="left-align">Select a button below to find your next activity!</p>
+    <h1 class="left-align">Select a button below to find your next activity!</h1>
     <i class="material-icons">person</i> <button id="refresh" class="waves-effect waves-light btn"></a>Find Random Solo Activity</button>
     <i class="material-icons">group</i> <button id="group-refresh" class="waves-effect waves-light btn">Find Random Group Activity</button>
-    <i class="material-icons">attach_money</i> <button id="free-refresh" class="waves-effect waves-light btn">Find Random Free Activity</button>
+    <i class="material-icons">attach_money</i> <button id="free-refresh" class="waves-effect waves-light btn">highlight free</button>
+    
     <hr>
-    <div class ="bucket" id="solo"></div> 
-    <div class = "bucket" id="group"></div>
-   
+    <div class ="#bucket" id="solo"></div> 
+    <div class ="card">
+        <div id= "container">
+            <p></p>
+            
+            <i class="material-icons"></i> <button id="fav" class="waves-effect waves-light btn">Favorite</button>
+        </div>
+    </div>
+        
+    <div class = "#bucket" id="group"></div>
+    <div id="active"></div>
     </div>
     <footer class="footer"><small>DISCLAIMER:All activities are final. No refunds. No batteries included. Consult your physician before attempting activities. May cause upset stomach, nausa, indegestion, restless leg syndrome, gumball eye, stanky leg, crank arm, sad face, droopy nose, big inhales, small exhales, exiting the matrix, going down the rabit hole, coming back out the rabit hole, around the tree, up the corner, everybody dance now. Results may vary. Nobody reads the fine print anyways.</small> </footer> 
 </body>
