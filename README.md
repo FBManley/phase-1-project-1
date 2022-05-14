@@ -60,3 +60,62 @@ function fetchActivity(){
 function fetchParticipants(){
     document.getElementById('group-refresh').addEventListener('click', fetchGroup)
 } 
+//helpers
+const createCard = (activity) => {
+    
+    const divCard = document.createElement('div')
+    const divImage = document.createElement('div')
+    const divcardContent = docuemnt.createElement('div')
+    const pDescription = document.createElement('p')
+    const divcardAction = document.createElement("card-action")
+    const link1 = document.createElement('a')
+
+    const img = document.create = "card-image"
+    const span = document.create = "span"
+
+    
+    divCard.className = "card"
+    divImage.className = "card-image"
+    span.className = "card-title"
+    divcardContent.className = "card-content"
+    divcardAction.className = "card-action"
+
+
+    img.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyLb5qaUpfo8K_7ZioaObLuaD-ddiYCLJsHw&usqp=CAU")
+    link1.setAttribute("href", "##")
+
+
+    span.innerText = "card title"
+    pDescription.innerText = "Loren Shitsum"
+    link1.innerText = "Act"
+
+    divImage.appendChild(img);
+    divImage.appendChild(span);
+    divcardContent.appendChild(pDescription)
+    divcardAction.appendChild(link1)
+
+    divCard.appendChild(divImage)
+    divCard.appendChild(divcardContent)
+    divCard.appendChild(divcardAction)
+
+    return divCard;
+}
+const renderActivities = () => {
+    //iterate over activities and display them as card
+    activity.forEach(activity => {
+        const col = renderActivity(activity)
+        row.appendChild(col)
+    })
+    mainDiv().appendChild(row)
+}
+const renderActivity = activity => {
+    //render the activity to the page
+    const row = document.createElement('row') 
+    row.className = "row"
+    const col = document.createElement('div')
+    col.className = "col s12 m6"
+
+    col.appendChild(createCard(activity))
+
+    return col;
+}

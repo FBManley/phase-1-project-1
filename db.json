@@ -1,0 +1,15 @@
+{
+    "favorites": [
+        {
+            "id": 1,
+            "activity": "racketball",
+            "price": "0"  
+        }, 
+        {
+            "id": 2,
+            "activity": "drink a la croix",
+            "price": "1"
+        }
+        
+    ]
+}

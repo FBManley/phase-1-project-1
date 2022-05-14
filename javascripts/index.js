@@ -1,29 +1,28 @@
 //need to make data available globally, set data to variable with empty array [], populate that array w data, then sort that array (24min joke vid)
 //add button that highlights free activity which filter or highlights a certain type of activity
-//create db.json to save and filter-  no clue how else to iterate
- //everything works up intil i try to create elements for db, save to db, and pull our of db + post requests 
-
- //cause
- //effect
-//result
-
+//create db.json to save and filter- not sure how to else to grab loaded api data from the dom
+ 
 const BASE_URL = 'https://www.boredapi.com/api' 
 
-//global variable
-//let activity = [];
-
 document.addEventListener('DOMContentLoaded', () => {
-fetchSolo() //load random activity to page 
-fetchGroup() //load random group activity
-addElements()
+    fetchSolo() //load random activity to page 
+    fetchGroup() //load random group activity
+    document.querySelector('#highlightsolo').addEventListener('click', highlightSolo)
+//addElements()
 //fetchFree() //highlights or keeps 0 price activities on page
 //fetchStoredActivity()//fetches db.json stored-not sure if needs to be on startup
-//document.querySelector("#free-refresh").addEventListener("click", addActivities) //returns button node
+
 })
 
 
+//const list = document.querySelectorAll('solos');
+// document.createElement('li')
+// Array.from(document.querySelector('#lost'))
+ 
 const fetchSolo = () => { 
-    const li = document.getElementById('solo');
+    let ul = document.getElementById("lost")
+    let li = document.createElement("li")
+    ul.appendChild(li)
     fetch(BASE_URL + `/activity?participants=1`)
     .then(response => response.json())
     .then(data => {
@@ -32,33 +31,111 @@ const fetchSolo = () => {
         <h3>Type: ${data.type}</h3> 
         <h3>Participants: ${data.participants}</h3>
         <h3>Estimated Price: $${data.price}</h3>`
+        //console.log(Array.from(ul)) //gives me empty array on each click
+        console.log(ul) // correctly expands ul w each click 
     })
-
-    //console.log(li)
+    
     fetchActivity()
 }
-    // let single = document.getElementById("single")
-    // let type = document.getElementById("type")
-    // let parts = document.getElementById("parts")
-    // let price = document.getElementById("price")
 
-// change nodelist to iterable array 
+//iterate through li nodes and highlight free events: once clicked, grabs li's, iterates, checks h3 at end of each- if so turn this li / thing red
+function highlightSolo(){
+    //let newArray = [];
+    let x = Array.from(document.querySelectorAll('li')) //select populated nodelist and create array
+    const drill = x.children[x[0].children.length-1].innerText.slice(-2) //drill into last elements in string, if so 
+     drill.forEach((element => {
+        if (element === 0) {
+            newArray.push(element);
+        }
+        console.log(newArray);    
+    }))
+            //if above condition resolves to tru /truthy, push the item in question to a newArray 
+         //iterate through li nodes
+
+    // (checkZero) => {num => num === 0}
+       
+  
+    //(whatever im calling each one as i terate through).children[x[0].children.length-1].innerText.slice(-2)
+
+     //console.log(filter) //iterte over children (nodelist)
+   //for each li, i need to reference the data at .children[3].innerHTML? so i can filter by that reference 
+
+    //console.log(filtered)
+    //.find((price => price[0])))
+   //console.log([...high])
+    //console.log(filtered)
+   //console.log(filter = Array.from(high))
+}
+function iterateOverElements(drill, element){
+    return drill.filter((element) => {
+    
+        return element. //in all cases where this is true- take out all elements
+    })
+
+    console.log(iterateOverElements(drill, "0"))
+}    
+    // if (param === 0){ //if the last two elements  in each li = 0..
+    //   console.log('success')  //lightUp()
+    // } else {
+    //     console.log('no free lunch')//do nothing/stop
+    // }
+
+
+function lightUp(){
+    //turn li red
+}
+
+const fetchGroup = () => { 
+    const li = document.getElementById('group'); 
+    fetch(BASE_URL + `/activity?participants=2`)
+    .then(response => response.json())
+    .then(data => { //if im creating a nodelist within a function here- how do i access it by another function?
+        li.innerHTML += `
+        <h1>Group Activity: ${data.activity}</h1>   
+        <h3>Type: ${data.type}</h3> 
+        <h3>Participants: ${data.participants}</h3>
+        <h3>Estimated Price: $${data.price}</h3>` 
+    })
+    fetchParticipants() 
+}
+
+//EventListeners
+function fetchActivity(){
+    document.getElementById('refresh').addEventListener('click', fetchSolo)
+}
+
+function fetchParticipants(){
+    document.getElementById('group-refresh').addEventListener('click', fetchGroup)
+} 
+
+function fetchElements(){
+    document.getElementById('free-refresh').addEventListener('click', addElements)
+}
+
+
+
+
+
+
 const addElements = () => {
-    const hone = document.querySelector("p");
-    
-    
+    const createList = document.createElement("ul", { is : 'expanding-list'}).querySelectorAll("ul")
+
     fetch(BASE_URL + `/activity?participants=1`)
     .then(response => response.json()) 
     .then(data =>{
-        hone.innerHTML += 
-       `<p>activity${data.activity}</p>
+        createList.innerHTML += 
+       `<p>${data.activity}</p> 
         <p>${data.type}</p>
-        <p>Parts ${data.participants}</p>
+        <p>${data.participants}</p>
         <p>$${data.price}</p>`
-        let pList = document.querySelectorAll("p")
-        console.log(pList)
-        let nlist = [...pList].map(n => n.textContent)
-        console.log(nlist) //now gettitng bck an array but its an array of just this one activity. 
+        //console.log(createList)
+        // const pList = document.querySelectorAll("p")
+        // console.log(Array.from(pList))
+        //Array.from(pList).filter(pList)
+        // let nList = [...pList] //.map(n => n.textContent)
+        // console.log(nList) //now gettitng back an array but its an array of just this one activity. 
+        
+        // return nList
         // const filtered = [...pList].filter(n=> n.textContent.includes($0))
         // console.log(filtered)
         //    const filtered = [] filter nodelist javascript
@@ -69,88 +146,26 @@ const addElements = () => {
     //     }) 
        
     })
-
-}
-const highlightFree=()=> { //iterate through bucket classes to find 0.0 and highlight them- no need for db.json
-    const high = document.querySelectorAll(".bucket")
-    console.log(high)
-}
-//helpers
-const createCard = (activity) => {
     
-    const divCard = document.createElement('div')
-    const divImage = document.createElement('div')
-    const divcardContent = docuemnt.createElement('div')
-    const pDescription = document.createElement('p')
-    const divcardAction = document.createElement("card-action")
-    const link1 = document.createElement('a')
-
-    const img = document.create = "card-image"
-    const span = document.create = "span"
-
-    
-    divCard.className = "card"
-    divImage.className = "card-image"
-    span.className = "card-title"
-    divcardContent.className = "card-content"
-    divcardAction.className = "card-action"
-
-
-    img.setAttribute("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyLb5qaUpfo8K_7ZioaObLuaD-ddiYCLJsHw&usqp=CAU")
-    link1.setAttribute("href", "##")
-
-
-    span.innerText = "card title"
-    pDescription.innerText = "Loren Shitsum"
-    link1.innerText = "Act"
-
-    divImage.appendChild(img);
-    divImage.appendChild(span);
-    divcardContent.appendChild(pDescription)
-    divcardAction.appendChild(link1)
-
-    divCard.appendChild(divImage)
-    divCard.appendChild(divcardContent)
-    divCard.appendChild(divcardAction)
-
-    return divCard;
-}
-const renderActivities = () => {
-    //iterate over activities and display them as card
-    activity.forEach(activity => {
-        const col = renderActivity(activity)
-        row.appendChild(col)
-    })
-    mainDiv().appendChild(row)
-}
-const renderActivity = activity => {
-    //render the activity to the page
-    const row = document.createElement('row') 
-    row.className = "row"
-    const col = document.createElement('div')
-    col.className = "col s12 m6"
-
-    col.appendChild(createCard(activity))
-
-    return col;
+    fetchElements()
 }
 
 
-const fetchGroup = () => { 
-        const li = document.getElementById('group'); 
-    fetch(BASE_URL + `/activity?participants=2`)
-    .then(response => response.json())
-    .then(data => { //if im creating a nodelist within a function here- how do i access it by another function?
-        li.innerHTML += `
-        <h1>Group Activity: ${data.activity}</h1>   
-        <h3>Type: ${data.type}</h3> 
-        <h3>Participants: ${data.participants}</h3>
-        <h3>Estimated Price: $${data.price}</h3>`
-        
-    })
-        fetchParticipants()
-        //must only print if data.participants > 1
-}
+
+// const highlightFree=()=> { //iterate through bucket classes to find 0.0 and highlight them- no need for db.json
+//     let pList = document.querySelectorAll("li")
+//     // let nList = [...pList].map(activity = activity.textContent)
+//     // return nList
+//     console.log(pList)
+// }
+// function filteredEnough(num){
+//     for (let i =0; num <= i; i++){
+//         if (num >= 1 ){
+//             return false;
+//         }
+//     }
+//     return num < 1
+// }
 
 //fetches my db.json info-where do i want this to happen?
 // async function fetchStoredActivity(){
@@ -163,19 +178,15 @@ const fetchGroup = () => {
 //     return data
 // };
 
-function addFavToRenderedActivities() {
+// const highlightChosen =() =>{
+//      document.getElementById('high').innerHTML = "<span style='color: red;'></span>"
 
-}
-//EventListeners
-function fetchActivity(){
-    document.getElementById('refresh').addEventListener('click', fetchSolo)
-}
-
-function fetchParticipants(){
-    document.getElementById('group-refresh').addEventListener('click', fetchGroup)
-} 
+// }
 
 
+// function highlightFav(){
+//     document.getElementById('highlight').addEventListener('click', highlightChosen)
+// }
 //should print my db.json to console log but does not 
 // const fetchFree = () => {
 //     const li = document.getElementById("active")
@@ -293,10 +304,9 @@ function fetchParticipants(){
 //     })
 // }
 
-//find a way around liveserver-
+
 //figure out how to push branches to save then start over from your save
-//delete everythign unused and start from this mornings 'save' point mentally 
-//take off all css if that issue persists
+
 //add a fav button on every rendered activity-
 //add a function sendsInfoToDb(){}//POSTING INFO TO CREATE ARRAY 
 //function retrieveFilteredInfoFromDb(){} //one button to filter bd.json- sends fetch from their . filter(by data.price > 0)
